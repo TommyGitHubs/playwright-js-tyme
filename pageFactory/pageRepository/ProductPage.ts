@@ -28,8 +28,6 @@ export class ProductPage extends ProductPageObjects {
     }
 
     async verifyProductPriceLowToHigh(): Promise<void> {
-        // lay het item trong do
-        // Chay vong lap so sanh ((Nho chat GPT))
         const parentDiv = await this.page.$('.thumbnails.grid.row.list-inline');
         let childDivs;
         const price = [];
@@ -53,5 +51,23 @@ export class ProductPage extends ProductPageObjects {
         for(let i=0; i<floatList.length-1; i++) {
             await expect(floatList[i]).toBeLessThanOrEqual(floatList[i+1])
         }
+    }
+
+    async clickOnAddToCardProduct(): Promise<void> {
+        const parentDiv = await this.page.$('.thumbnails.grid.row.list-inline');
+        let childDivs;
+        const price = [];
+
+        if (await parentDiv.$$('div')) {
+            childDivs = await parentDiv.$$('div');
+        }
+
+        for (const childDiv of childDivs) {
+            const priceElement = await childDiv.$('.pricetag .oneprice');
+            if (priceElement) {
+                price.push(await (await this.page.evaluate(element => element.textContent, priceElement)).slice(1));
+            }
+        }
+        this.compareLowToHighValue(price);
     }
 }

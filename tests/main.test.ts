@@ -17,4 +17,5 @@ test(`@E2E Watch T-shirts detail infomation.`, async ({ homePage, productPage })
     await productPage.verifyProductPage();
     await productPage.sortPriceLowToHigh();
     await productPage.verifyProductPriceLowToHigh();
+    await productPage.clickOnAddToCardProduct();
 })
