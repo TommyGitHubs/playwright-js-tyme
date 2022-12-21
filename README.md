@@ -9,7 +9,7 @@ To get started with these examples, you will need to have Node.js and npm instal
 1. Clone the repository:
  
 ```bash
-git clone https://github.com/TommyGitHubs/playwright-js-tyme.git
+git clone git@github.com:TommyGitHubs/playwright-js-tyme.git
 ```
 
 2. Navigate to the repository directory:
