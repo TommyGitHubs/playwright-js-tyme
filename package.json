@@ -4,7 +4,9 @@
   "description": "Playwright TS",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test"
+    "test": "npx playwright test --project=Chrome",
+    "test:firefox": "npx playwright test --project=Firefox",
+    "test:allBrowser": "npx playwright test"
   },
   "keywords": [],
   "author": "",

@@ -23,9 +23,23 @@ cd playwright-js-tyme
 npm install
 ```
     
-4. Run the test (Both Chrome and FireFox default):
+4. Run the test:
+
+a. Run default (Chrome browser)
 ```bash
 npx cross-env ENV=dev npm run test
+```
+
+b. Run with Firefox
+
+```bash
+npx cross-env ENV=dev npm run test:Firefox
+```
+
+c. Run all Browser
+
+```bash
+npx cross-env ENV=dev npm run test:allBrowser
 ```
 
 ## Examples

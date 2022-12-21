@@ -39,7 +39,7 @@ const config: PlaywrightTestConfig = {
 
         screenshot: `on`,
         video: `retain-on-failure`,
-        trace: `retain-on-failure`
+        trace: `retain-on-failure`,
       },
     }
   ],
