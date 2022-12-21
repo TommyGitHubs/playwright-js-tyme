@@ -41,4 +41,8 @@ export class WebActions {
             setTimeout(resolve, time);
         });
     }
+
+    async getTextFromWebElements(locator: string): Promise<string[]> {
+        return this.page.$$eval(locator, elements => elements.map(item => item.textContent.trim()));
+    }
 }

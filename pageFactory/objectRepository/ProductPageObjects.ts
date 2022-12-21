@@ -3,5 +3,11 @@ export class ProductPageObjects {
     protected static LOW_TO_HIGH_OPTION_VALUE = `p.price-ASC`;
 
     protected static TITLE = `h1`;
-    protected static PRICE = `(//div[@class='price']//div)`;
+    protected static PRODUCT_PARENT_XPATH = `//div[contains(@class,'thumbnails grid')]`;
+    protected static PRODUCT_NAME = `.fixed_wrapper .fixed .prdocutname`;
+    protected static PRICE_CLASS = `.thumbnail .pricetag .oneprice`;
+    protected static PRODUCT_CARD = `.pricetag .productcart`;
+
+    protected static PRODUCT_FIL_NEPRICE = `.productfilneprice`;
+    protected static PRODUCT_DETAIL_NAME = `//h1[@class='productname']//span[1]`;
 }

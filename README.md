@@ -33,7 +33,7 @@ npx cross-env ENV=dev npm run test
 b. Run with Firefox
 
 ```bash
-npx cross-env ENV=dev npm run test:Firefox
+npx cross-env ENV=dev npm run test:firefox
 ```
 
 c. Run all Browser

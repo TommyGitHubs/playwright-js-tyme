@@ -28,7 +28,7 @@ export class ProductPage extends ProductPageObjects {
     }
 
     async verifyProductPriceLowToHigh(): Promise<void> {
-        const parentDiv = await this.page.$('.thumbnails.grid.row.list-inline');
+        const parentDiv = await this.page.$(ProductPageObjects.PRODUCT_PARENT_XPATH);
         let childDivs;
         const price = [];
 
@@ -37,41 +37,59 @@ export class ProductPage extends ProductPageObjects {
         }
 
         for (const childDiv of childDivs) {
-            const priceElement = await childDiv.$('.pricetag .oneprice');
+            const priceElement = await childDiv.$(ProductPageObjects.PRICE_CLASS);
             if (priceElement) {
                 price.push(await (await this.page.evaluate(element => element.textContent, priceElement)).slice(1));
             }
         }
-        this.compareLowToHighValue(price);
+        // this.compareLowToHighValue(price);
+        // Run debugs for fix double run
+        const finalPriceList = price.map(string => parseFloat(string));
+        for(let i=0; i<(finalPriceList).length-1; i++) {
+            expect(finalPriceList[i]).toBeLessThanOrEqual(finalPriceList[i+1])
+        }
     }
 
+
+    // ASCD
     async compareLowToHighValue(list: string[]): Promise<void> {
-        const floatList: number[] = list.map(val => Number(val));
-
+        const floatList = list.map(string => parseFloat(string));
         for(let i=0; i<floatList.length-1; i++) {
-            await expect(floatList[i]).toBeLessThanOrEqual(floatList[i+1])
+            expect(floatList[i]).toBeLessThanOrEqual(floatList[i+1])
         }
     }
 
-    async clickOnAddToCardProduct(): Promise<void> {
+    async clickOnAddToCardProductAndVerifyInfor(): Promise<void> {
         const parentDiv = await this.page.$('.thumbnails.grid.row.list-inline');
         let childDivs;
-        const price = [];
+        let price = '';
+        let productCard;
+        let priceElement;
 
         if (await parentDiv.$$('div')) {
             childDivs = await parentDiv.$$('div');
         }
 
         for (const childDiv of childDivs) {
-            const priceElement = await childDiv.$('.pricetag .oneprice');
-            if (priceElement) {
-                price.push(await (await this.page.evaluate(element => element.textContent, priceElement)).slice(1));
+            productCard = await childDiv.$(ProductPageObjects.PRODUCT_CARD);
+            priceElement = await childDiv.$(ProductPageObjects.PRICE_CLASS);
+            let productName = await childDiv.$(ProductPageObjects.PRODUCT_NAME);
+            if (productCard) {
+                price = await (await this.page.evaluate(element => element.textContent, priceElement));
+
+                if(productName) {
+                    let productNameContext = await this.page.evaluate(element => element.textContent, productName);
+                    await productCard.click();
+                    this.verifyProductDetail(productNameContext, price);
+                }
+                break;
             }
         }
-        this.compareLowToHighValue(price);
     }
 
     async verifyProductDetail(name: string, price:string): Promise<void> {
-
+        console.log(name);
+        await webActions.verifyElementText(ProductPageObjects.PRODUCT_DETAIL_NAME, name);
+        await webActions.verifyElementText(ProductPageObjects.PRODUCT_FIL_NEPRICE, price);
     }
 }
