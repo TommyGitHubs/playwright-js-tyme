@@ -13,7 +13,7 @@ export class ProductPage extends ProductPageObjects {
         webActions = new WebActions(this.page);
     };
 
-    async verifyProductPage(): Promise<void> {
+    async verifyTShirtsPage(): Promise<void> {
         await webActions.verifyElementText(ProductPageObjects.TITLE, `T-shirts`)
     }
 
@@ -69,5 +69,9 @@ export class ProductPage extends ProductPageObjects {
             }
         }
         this.compareLowToHighValue(price);
+    }
+
+    async verifyProductDetail(name: string, price:string): Promise<void> {
+
     }
 }

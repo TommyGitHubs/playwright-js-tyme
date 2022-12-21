@@ -10,7 +10,7 @@ if (!ENV || ![`dev`,`uat`].includes(ENV)) {
 
 const config: PlaywrightTestConfig = {
   testDir: './tests',
-  timeout: 920000,
+  timeout: 120000,
   retries: 0,
   reporter: 'html',
 
@@ -21,7 +21,7 @@ const config: PlaywrightTestConfig = {
         browserName: `chromium`,
         channel: `chrome`,
         baseURL: testConfig[process.env.ENV],
-        headless: true,
+        headless: false,
 
         screenshot: `on`,
         video: `on`,
@@ -35,7 +35,7 @@ const config: PlaywrightTestConfig = {
       use: {
         browserName: `firefox`,
         baseURL: testConfig[process.env.ENV],
-        headless: true,
+        headless: false,
 
         screenshot: `on`,
         video: `retain-on-failure`,
