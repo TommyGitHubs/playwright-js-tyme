@@ -21,6 +21,7 @@ cd playwright-js-tyme
 3. Install the dependencies:
 ```bash
 npm install
+npx playwright install
 ```
     
 4. Run the test:
