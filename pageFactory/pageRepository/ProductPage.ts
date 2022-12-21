@@ -88,7 +88,6 @@ export class ProductPage extends ProductPageObjects {
     }
 
     async verifyProductDetail(name: string, price:string): Promise<void> {
-        console.log(name);
         await webActions.verifyElementText(ProductPageObjects.PRODUCT_DETAIL_NAME, name);
         await webActions.verifyElementText(ProductPageObjects.PRODUCT_FIL_NEPRICE, price);
     }
